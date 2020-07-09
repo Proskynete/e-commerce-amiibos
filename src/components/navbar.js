@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import LOGO from '../assets/images/logo.png';
 
 const Navbar = () => {
@@ -37,9 +38,9 @@ const Navbar = () => {
 				className={`${showMenu ? 'navbar-menu is-active' : 'navbar-menu'}`}
 			>
 				<div className='navbar-start'>
-					<a href='#!' className='navbar-item'>
+					<Link to='/' className='navbar-item'>
 						Inicio
-					</a>
+					</Link>
 
 					<a href='#!' className='navbar-item'>
 						Documentation
@@ -49,13 +50,13 @@ const Navbar = () => {
 				<div className='navbar-end'>
 					<div className='navbar-item'>
 						<div className='buttons'>
-							<a href='#!' className='is-primary'>
+							<Link to='/login' className='is-primary'>
 								<span className='icon'>
 									<span className='fa-stack'>
 										<i className='fas fa-user' />
 									</span>
 								</span>
-							</a>
+							</Link>
 							<a href='#!' className='is-light'>
 								<span className='icon'>
 									<span className='fa-stack'>
