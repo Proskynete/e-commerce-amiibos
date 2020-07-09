@@ -29,6 +29,10 @@
         &:first-child {
           margin-bottom: 20px;
         }
+
+        code {
+          background-color: transparent;
+        }
       }
     }
   }

@@ -7,6 +7,9 @@
 @import '~bulma/sass/helpers/all';
 @import '~bulma/sass/layout/all';
 
+@import './custom-colors';
+
 html {
   box-sizing: content-box;
+  background-color: $custom-grey;
 }
