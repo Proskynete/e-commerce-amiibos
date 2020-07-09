@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
-const HomeView = lazy(() => import('../views/layout/home'));
-const LoginView = lazy(() => import('../views/login'));
+const HomeView = lazy(() => import('../views/layout/home/'));
+const ProfileView = lazy(() => import('../views/layout/profile/'));
 
 export const routes = [
 	{
@@ -11,9 +11,9 @@ export const routes = [
 		component: HomeView,
 	},
 	{
-		path: '/login',
-		name: 'Login',
+		path: '/profile',
+		name: 'Perfil',
 		exact: true,
-		component: LoginView,
+		component: ProfileView,
 	},
 ];

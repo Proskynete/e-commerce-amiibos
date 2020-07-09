@@ -3,9 +3,30 @@
 @import '~bulma/sass/components/all';
 @import '~bulma/sass/elements/all';
 @import '~bulma/sass/grid/all';
+@import '~bulma/sass/form/all';
 @import '~bulma/sass/helpers/all';
 @import '~bulma/sass/layout/all';
 
-html {
-  box-sizing: content-box;
+@import './custom-colors';
+
+body {
+  background-color: $custom-grey;
+  box-sizing: inherit;
+  height: 100vh;
+  overflow-x: initial;
+  width: 100vw;
+
+  div[role='menuitem'] {
+    cursor: pointer;
+  }
+
+  .columns {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .main-section {
+    max-width: 100%;
+    padding-top: 80px;
+  }
 }

@@ -1,0 +1,41 @@
+.nav {
+  @media screen and (min-width: 1024px) {
+
+    padding-left: 200px;
+    padding-right: 200px;
+    display: flex;
+    height: 80px;
+
+    &__logo {
+      margin: auto;
+      margin-right: 40px;
+
+      img {
+        width: 200px;
+        min-height: 45px !important;
+      }
+    }
+
+    &__item {
+      padding-left: 20px;
+      padding-right: 20px;
+      font-size: 22px;
+    }
+  }
+
+  @media screen and (max-width: 813px) {
+    .navbar-end {
+
+      .navbar-item {
+        display: flex;
+        flex-direction: row !important;
+
+        .nav__item {
+          padding-left: 20px;
+          padding-right: 20px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}
