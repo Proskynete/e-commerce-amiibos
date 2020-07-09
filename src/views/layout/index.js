@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { routes } from '../../routes';
 import Navbar from '../../components/navbar/';
 
@@ -13,12 +13,10 @@ const mainRoutes = routes.map((route) => (
 ));
 
 const Layout = () => (
-	<Router basename='/'>
+	<Suspense fallback={'Cargando...'}>
 		<Navbar />
-		<Suspense fallback={'Cargando...'}>
-			<Switch>{mainRoutes}</Switch>
-		</Suspense>
-	</Router>
+		<Switch>{mainRoutes}</Switch>
+	</Suspense>
 );
 
 export default Layout;

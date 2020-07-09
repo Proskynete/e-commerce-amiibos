@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS } from '../config/constants';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../config/constants';
 
 const initialState = {
 	user_data: {},
@@ -8,6 +8,7 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case LOGIN_SUCCESS:
+		case LOGOUT_SUCCESS:
 			return {
 				...state,
 				user_data: action.payload.user_data,

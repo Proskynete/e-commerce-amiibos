@@ -15,16 +15,13 @@ const Login = (props) => {
 
 	const [button, setButton] = useState(false);
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
+	const handleSubmit = () => {
 		setButton(true);
 
 		loginMethod({
 			email: credentials.email,
 			password: credentials.password,
 		});
-
-		setButton(false);
 	};
 
 	useEffect(() => {
@@ -47,49 +44,49 @@ const Login = (props) => {
 							<div className='content'>
 								<img className='login__logo' src={LOGO} alt='Amiibo logo' />
 							</div>
-							<form onSubmit={handleSubmit}>
-								<div className='content'>
-									<div className='field'>
-										<p className='control has-icons-left'>
-											<input
-												className='input'
-												type='email'
-												defaultValue={credentials.email}
-												placeholder='Correo electrónico'
-											/>
-											<span className='icon is-small is-left'>
-												<i className='fas fa-envelope' />
-											</span>
-										</p>
-									</div>
-									<div className='field'>
-										<p className='control has-icons-left'>
-											<input
-												className='input'
-												type='password'
-												defaultValue={credentials.password}
-												placeholder='*********'
-											/>
-											<span className='icon is-small is-left'>
-												<i className='fas fa-lock' />
-											</span>
-										</p>
-									</div>
-									<div className='field' style={{ marginTop: '50px' }}>
-										<p className='control'>
-											<button
-												type='submit'
-												className={`button is-info ${
-													button ? 'is-loading' : null
-												}`}
-												disabled={button}
-											>
-												Iniciar sesión
-											</button>
-										</p>
-									</div>
+
+							<div className='content'>
+								<div className='field'>
+									<p className='control has-icons-left'>
+										<input
+											className='input'
+											type='email'
+											defaultValue={credentials.email}
+											placeholder='Correo electrónico'
+										/>
+										<span className='icon is-small is-left'>
+											<i className='fas fa-envelope' />
+										</span>
+									</p>
 								</div>
-							</form>
+								<div className='field'>
+									<p className='control has-icons-left'>
+										<input
+											className='input'
+											type='password'
+											defaultValue={credentials.password}
+											placeholder='*********'
+										/>
+										<span className='icon is-small is-left'>
+											<i className='fas fa-lock' />
+										</span>
+									</p>
+								</div>
+								<div className='field' style={{ marginTop: '50px' }}>
+									<p className='control'>
+										<button
+											type='submit'
+											className={`button is-info ${
+												button ? 'is-loading' : null
+											}`}
+											disabled={button}
+											onClick={handleSubmit}
+										>
+											Iniciar sesión
+										</button>
+									</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
