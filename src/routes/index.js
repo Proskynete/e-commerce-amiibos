@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 
-const HomeView = lazy(() => import('../views/layout/home'));
+const HomeView = lazy(() => import('../views/home'));
 const LoginView = lazy(() => import('../views/login'));
 
 export const routes = [

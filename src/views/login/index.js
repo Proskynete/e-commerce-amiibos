@@ -1,36 +1,42 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import LOGO from '../../assets/images/logo.png';
+import { loginAction } from '../../actions';
+import { defaultValues } from '../../config/default_values';
 import './index.scss';
 
-const Login = () => {
+const Login = (props) => {
+	const { loginMethod, login_state, history } = props;
 	const [credentials, setCredentials] = useState({
 		email: '',
 		password: '',
 	});
+
 	const [button, setButton] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setButton(true);
 
-		setTimeout(() => {
-			const obj = {
-				id: '1',
-				email: 'eduardo.alvarez@papajohns.cl',
-				name: 'Eduardo',
-				lastname: 'Alvarez',
-			};
-			localStorage.setItem('user', JSON.stringify(obj));
-			setButton(false);
-		}, 2000);
+		loginMethod({
+			email: credentials.email,
+			password: credentials.password,
+		});
+
+		setButton(false);
 	};
 
 	useEffect(() => {
 		setCredentials({
-			email: 'eduardo.alvarez@papajohns.cl',
-			password: 'frontend2020',
+			email: defaultValues.login.email,
+			password: defaultValues.login.password,
 		});
-	}, []);
+
+		if (login_state) {
+			history.push('/');
+		}
+	}, [history, login_state]);
 
 	return (
 		<div className='content login'>
@@ -92,4 +98,16 @@ const Login = () => {
 	);
 };
 
-export default Login;
+Login.propTypes = {
+	login_state: PropTypes.bool.isRequired,
+	loginMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	(state) => ({
+		login_state: state.login.has_login,
+	}),
+	(dispatch) => ({
+		loginMethod: loginAction(dispatch),
+	}),
+)(Login);
