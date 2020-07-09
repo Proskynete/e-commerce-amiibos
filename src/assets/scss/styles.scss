@@ -9,7 +9,20 @@
 
 @import './custom-colors';
 
-html {
-  box-sizing: content-box;
+body {
   background-color: $custom-grey;
+  box-sizing: inherit;
+  height: 100vh;
+  overflow-x: initial;
+  width: 100vw;
+
+  .columns {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .main-section {
+    max-width: 100%;
+    padding-top: 80px;
+  }
 }

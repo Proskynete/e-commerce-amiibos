@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import LOGO from '../assets/images/logo.png';
+import LOGO from '../../assets/images/logo.png';
+import './index.scss';
 
 const Navbar = () => {
 	const [showMenu, setShowMenu] = useState(false);
+	const user = localStorage.getItem('user');
 
 	const handleSetMobileMenu = () => {
 		setShowMenu(!showMenu);
@@ -11,7 +13,7 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className='navbar is-fixed-top'
+			className='navbar is-fixed-top '
 			role='navigation'
 			aria-label='main navigation'
 		>
@@ -41,22 +43,29 @@ const Navbar = () => {
 					<Link to='/' className='navbar-item'>
 						Inicio
 					</Link>
-
-					<a href='#!' className='navbar-item'>
-						Documentation
-					</a>
 				</div>
 
 				<div className='navbar-end'>
 					<div className='navbar-item'>
 						<div className='buttons'>
-							<Link to='/login' className='is-primary'>
-								<span className='icon'>
-									<span className='fa-stack'>
-										<i className='fas fa-user' />
+							{!JSON.parse(user) ? (
+								<Link to='/login' className='is-primary'>
+									<span className='icon'>
+										<span className='fa-stack'>
+											<i className='fas fa-user' />
+										</span>
 									</span>
-								</span>
-							</Link>
+								</Link>
+							) : (
+								<Link to='/profile' className='is-primary'>
+									<span className='icon'>
+										<span className='fa-stack'>
+											<i className='fas fa-cog' />
+										</span>
+									</span>
+								</Link>
+							)}
+
 							<a href='#!' className='is-light'>
 								<span className='icon'>
 									<span className='fa-stack'>
