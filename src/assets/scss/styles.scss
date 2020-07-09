@@ -16,6 +16,10 @@ body {
   overflow-x: initial;
   width: 100vw;
 
+  div[role='menuitem'] {
+    cursor: pointer;
+  }
+
   .columns {
     margin-left: 0 !important;
     margin-right: 0 !important;
