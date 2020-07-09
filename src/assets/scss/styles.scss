@@ -1,5 +1,11 @@
-@import '~bulma/sass/utilities/_all.sass';
-@import '~bulma/sass/base/_all.sass';
-@import '~bulma/sass/elements/_all.sass';
-@import '~bulma/sass/layout/_all.sass';
-@import '~bulma/sass/components/_all.sass';
+@import '~bulma/sass/utilities/all';
+@import '~bulma/sass/base/all';
+@import '~bulma/sass/components/all';
+@import '~bulma/sass/elements/all';
+@import '~bulma/sass/grid/all';
+@import '~bulma/sass/helpers/all';
+@import '~bulma/sass/layout/all';
+
+html {
+  box-sizing: content-box;
+}
