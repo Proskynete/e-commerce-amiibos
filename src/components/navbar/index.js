@@ -59,7 +59,7 @@ const Navbar = (props) => {
 				<div className='navbar-end'>
 					<div className='navbar-item'>
 						<div className='buttons'>
-							{!login_state ? (
+							{!user ? (
 								<Link to='/login' className='nav__item has-text-dark'>
 									<span className='icon'>
 										<span className='fa-stack'>

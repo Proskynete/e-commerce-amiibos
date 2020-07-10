@@ -12,6 +12,10 @@ export const getAmiibosPaginatedAction = (dispatch) => async ({
 		const _page = parseInt(page);
 		const _limit = parseInt(limit);
 
+		const max = 25000;
+		const min = 10000;
+		const sale = 0.15;
+
 		const { data } = await axios.get('https://www.amiiboapi.com/api/amiibo');
 
 		const startIndex = (_page - 1) * _limit;
@@ -27,6 +31,20 @@ export const getAmiibosPaginatedAction = (dispatch) => async ({
 		};
 
 		const amiibos = data.amiibo.slice(startIndex, endIndex);
+		amiibos.map((amiibo) => {
+			const randomPrice = Math.floor(Math.random() * (max - min)) + min;
+			const normalPrice = randomPrice;
+			const internetPrice = Math.round(normalPrice - sale * normalPrice);
+			const rating = (Math.random() * (5.0 - 2.5) + 2.5).toFixed(1);
+
+			amiibo['price'] = {
+				normal: normalPrice,
+				internet: internetPrice,
+			};
+			amiibo['rating'] = rating;
+
+			return amiibo;
+		});
 
 		return dispatch({
 			type: GET_AMIIBOS_PAGINATED,
