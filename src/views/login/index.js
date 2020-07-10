@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import LOGO from '../../assets/images/logo.png';
 import { loginAction } from '../../actions';
 import { defaultValues } from '../../config/default_values';
+import Loader from '../../components/loader';
+import LOGO from '../../assets/images/logo.png';
 import './index.scss';
 
 const Login = (props) => {
@@ -36,62 +38,44 @@ const Login = (props) => {
 	}, [history, login_state]);
 
 	return (
-		<div className='content login'>
-			<div className='columns is-narrow-desktop'>
-				<div className='column is-4 is-offset-4'>
-					<div className='card'>
-						<div className='card-content'>
-							<div className='content'>
-								<img className='login__logo' src={LOGO} alt='Amiibo logo' />
+		<Container fluid className='login'>
+			<Row className='justify-content-md-center'>
+				<Col xs md={{ span: 3 }}>
+					<Card>
+						<Card.Body>
+							<div className='login__logo'>
+								<img className='' src={LOGO} alt='Amiibo logo' />
 							</div>
+							<Form className='login__form'>
+								<Form.Group controlId='email'>
+									<Form.Control
+										type='email'
+										placeholder='Correo electrónico'
+										defaultValue={credentials.email}
+									/>
+								</Form.Group>
 
-							<div className='content'>
-								<div className='field'>
-									<p className='control has-icons-left'>
-										<input
-											className='input'
-											type='email'
-											defaultValue={credentials.email}
-											placeholder='Correo electrónico'
-										/>
-										<span className='icon is-small is-left'>
-											<i className='fas fa-envelope' />
-										</span>
-									</p>
-								</div>
-								<div className='field'>
-									<p className='control has-icons-left'>
-										<input
-											className='input'
-											type='password'
-											defaultValue={credentials.password}
-											placeholder='*********'
-										/>
-										<span className='icon is-small is-left'>
-											<i className='fas fa-lock' />
-										</span>
-									</p>
-								</div>
-								<div className='field' style={{ marginTop: '50px' }}>
-									<p className='control'>
-										<button
-											type='submit'
-											className={`button is-info ${
-												button ? 'is-loading' : null
-											}`}
-											disabled={button}
-											onClick={handleSubmit}
-										>
-											Iniciar sesión
-										</button>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+								<Form.Group controlId='password'>
+									<Form.Control
+										type='password'
+										placeholder='*********'
+										defaultValue={credentials.password}
+									/>
+								</Form.Group>
+
+								<Button
+									variant='outline-info'
+									disabled={button}
+									onClick={handleSubmit}
+								>
+									{button ? <Loader text='Verificando...' /> : 'Iniciar sesión'}
+								</Button>
+							</Form>
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
+		</Container>
 	);
 };
 
