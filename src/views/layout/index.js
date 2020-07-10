@@ -16,12 +16,8 @@ const mainRoutes = routes.map((route) => (
 const Layout = () => (
 	<Container>
 		<Suspense fallback={'Cargando...'}>
-			<Row>
-				<Navigation />
-			</Row>
-			<Switch>
-				<Row>{mainRoutes}</Row>
-			</Switch>
+			<Navigation />
+			<Switch>{mainRoutes}</Switch>
 		</Suspense>
 	</Container>
 );

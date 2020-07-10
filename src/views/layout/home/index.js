@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Container, Row, Pagination } from 'react-bootstrap';
+import { Container, Row, Pagination, Jumbotron, Col } from 'react-bootstrap';
 import { getAmiibosPaginatedAction } from '../../../actions';
 import AmiiboCard from '../../../components/amiibo_card';
 import './index.scss';
@@ -31,7 +31,7 @@ const Home = (props) => {
 			}
 		}
 		if (pagination.current_page >= pagination.last_page - 8) {
-			for (let i = pagination.last_page - 8; i <= pagination.last_page; i++) {
+			for (let i = pagination.last_page - 7; i <= pagination.last_page; i++) {
 				item.push(i);
 			}
 		}
@@ -83,19 +83,34 @@ const Home = (props) => {
 
 	return (
 		<Container className='home'>
-			{amiibos && amiibos.length > 0 ? (
-				<>
-					<Row className='justify-content-md-center home__inner__container'>
-						{handleShowAmiibos(amiibos)}
-					</Row>
+			<Row className='justify-content-md-center'>
+				{amiibos && amiibos.length > 0 ? (
+					<>
+						<Col xs={12}>
+							<Jumbotron fluid className='text-center'>
+								<Container>
+									<h1>Bienvenido Amiibo-Maniatico!</h1>
+									<p>
+										Acá encontrarás la mejor y más grande variedad de nuestros
+										amados Amiibos. A si que no pierdas más tiempo, ve a
+										conseguir el tuyo antes que se agoten.
+									</p>
+								</Container>
+							</Jumbotron>
+						</Col>
 
-					<Row className='justify-content-md-center home__inner__container'>
+						<Col xs={12}>
+							<div className='container__amiibos'>
+								{handleShowAmiibos(amiibos)}
+							</div>
+						</Col>
+
 						{handlePrintPagination(pagination)}
-					</Row>
-				</>
-			) : (
-				'Cargando...'
-			)}
+					</>
+				) : (
+					'Cargando...'
+				)}
+			</Row>
 		</Container>
 	);
 };
