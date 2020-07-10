@@ -4,16 +4,13 @@ import {
 	GET_AMIIBOS_PAGINATED_ERROR,
 } from '../config/constants';
 
-export const getAmiibosPaginatedAction = (dispatch) => async ({
-	page,
-	limit,
-}) => {
+export const getAmiibosPaginatedAction = (dispatch) => async (page) => {
 	try {
-		const _page = parseInt(page);
-		const _limit = parseInt(limit);
+		const _page = page ? parseInt(page) : 1;
+		const _limit = 12;
 
-		const max = 255;
-		const min = 100;
+		const maxPrice = 255;
+		const minPrice = 100;
 		const sale = 0.15;
 
 		const { data } = await axios.get('https://www.amiiboapi.com/api/amiibo');
@@ -23,16 +20,18 @@ export const getAmiibosPaginatedAction = (dispatch) => async ({
 		const lastIndex = Math.round(data.amiibo.length / _limit);
 
 		const pagination = {
-			next_page: _page + 1,
-			previous_page: _page - 1,
 			first_page: 1,
+			previous_page: _page - 1,
+			current_page: _page,
+			next_page: _page + 1,
 			last_page: lastIndex,
-			limit: _limit,
 		};
 
 		const amiibos = data.amiibo.slice(startIndex, endIndex);
+
 		amiibos.map((amiibo) => {
-			const randomPrice = Math.floor(Math.random() * (max - min)) + min;
+			const randomPrice =
+				Math.floor(Math.random() * (maxPrice - minPrice)) + minPrice;
 			const normalPrice = Math.round(randomPrice * 100 - 1);
 			const internetPrice = Math.round(normalPrice - sale * normalPrice);
 			const rating = (Math.random() * (5.0 - 2.5) + 2.5).toFixed(1);
