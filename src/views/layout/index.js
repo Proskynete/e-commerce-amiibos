@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { Container, Row } from 'react-bootstrap';
 import { routes } from '../../routes';
-import Navbar from '../../components/navbar/';
+import Navigation from '../../components/navbar/';
 
 const mainRoutes = routes.map((route) => (
 	<Route
@@ -13,10 +14,12 @@ const mainRoutes = routes.map((route) => (
 ));
 
 const Layout = () => (
-	<Suspense fallback={'Cargando...'}>
-		<Navbar />
-		<Switch>{mainRoutes}</Switch>
-	</Suspense>
+	<Container>
+		<Suspense fallback={'Cargando...'}>
+			<Navigation />
+			<Switch>{mainRoutes}</Switch>
+		</Suspense>
+	</Container>
 );
 
 export default Layout;

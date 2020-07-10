@@ -1,9 +1,10 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { loginReducer } from './reducers';
+import { loginReducer, amiibosReducer } from './reducers';
 
 const rootReducer = combineReducers({
-	login: loginReducer,
+	loginStore: loginReducer,
+	amiibosStore: amiibosReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
