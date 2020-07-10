@@ -12,7 +12,7 @@
 body {
   background-color: $custom-grey;
   box-sizing: inherit;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: initial;
   width: 100vw;
 
@@ -26,7 +26,7 @@ body {
   }
 
   .main-section {
-    max-width: 100%;
+    width: 100%;
     padding-top: 80px;
   }
 }

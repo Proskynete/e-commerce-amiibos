@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAmiibosPaginatedAction } from '../../../actions';
+import AmiiboCard from '../../../components/amiibo_card';
 
 const Home = (props) => {
 	const { amiibos, getAmiibosPaginatedMethod } = props;
 	const [pagination] = useState({ page: 1, limit: 15 });
+
+	const handleShowAmiibos = (ammibos) =>
+		ammibos.map((amiibo) => <AmiiboCard key={amiibo.tail} {...amiibo} />);
 
 	useEffect(() => {
 		if (amiibos.length < 1) {
@@ -14,13 +18,13 @@ const Home = (props) => {
 				limit: pagination.limit,
 			});
 		}
-	}, []);
+	}, [amiibos, pagination, getAmiibosPaginatedMethod]);
 
 	return (
 		<div className='container'>
-			<div className='columns'>
-				<div className='column'>
-					{amiibos && amiibos.length > 0 ? <h1>yeah</h1> : null}
+			<div className='section'>
+				<div className='row columns is-multiline'>
+					{amiibos && amiibos.length > 0 ? handleShowAmiibos(amiibos) : null}
 				</div>
 			</div>
 		</div>
