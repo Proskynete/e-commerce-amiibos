@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Container, Row } from 'react-bootstrap';
 import { routes } from '../../routes';
-import Navbar from '../../components/navbar/';
+import Navigation from '../../components/navbar/';
 
 const mainRoutes = routes.map((route) => (
 	<Route
@@ -17,7 +17,7 @@ const Layout = () => (
 	<Container>
 		<Suspense fallback={'Cargando...'}>
 			<Row>
-				<Navbar />
+				<Navigation />
 			</Row>
 			<Switch>
 				<Row>{mainRoutes}</Row>

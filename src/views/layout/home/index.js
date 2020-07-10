@@ -84,7 +84,7 @@ const Home = (props) => {
 	return (
 		<Container className='home'>
 			{amiibos && amiibos.length > 0 ? (
-				<div className='home__inner'>
+				<>
 					<Row className='justify-content-md-center home__inner__container'>
 						{handleShowAmiibos(amiibos)}
 					</Row>
@@ -92,7 +92,7 @@ const Home = (props) => {
 					<Row className='justify-content-md-center home__inner__container'>
 						{handlePrintPagination(pagination)}
 					</Row>
-				</div>
+				</>
 			) : (
 				'Cargando...'
 			)}

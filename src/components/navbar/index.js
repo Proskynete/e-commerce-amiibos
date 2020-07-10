@@ -1,110 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import LOGO from '../../assets/images/logo.png';
 import { logoutAction } from '../../actions';
 import './index.scss';
 
-const Navbar = (props) => {
+const Navigation = (props) => {
 	const { logoutMethod } = props;
-
-	const [showMenu, setShowMenu] = useState(false);
 	const user = JSON.parse(localStorage.getItem('user'));
-
-	const handleSetMobileMenu = () => {
-		setShowMenu(!showMenu);
-	};
 
 	const handleLogout = () => {
 		logoutMethod();
 	};
 
 	return (
-		<nav
-			className='navbar is-fixed-top nav'
-			role='navigation'
-			aria-label='main navigation'
+		<Navbar
+			collapseOnSelect
+			expand='lg'
+			bg='light'
+			fixed='top'
+			className='navigation'
 		>
-			<div className='navbar-brand'>
-				<div className='nav__logo'>
-					<a href='/' className='navbar-item'>
-						<img src={LOGO} alt='Amiibos logo' />
-					</a>
-				</div>
+			<Navbar.Brand href='/' className='navbar-item logo__container'>
+				<img src={LOGO} alt='Amiibos logo' />
+			</Navbar.Brand>
+			<Navbar.Toggle aria-controls='responsive-navbar-nav' />
+			<Navbar.Collapse id='responsive-navbar-nav'>
+				<Nav className='mr-auto'>
+					{/*	<Nav.Link href='/'>Inicio</Nav.Link> */}
+				</Nav>
+				<Nav className='navbar__right'>
+					{!user ? (
+						<Link to='/login' className='nav__item'>
+							<i className='fas fa-user-circle' />
+						</Link>
+					) : (
+						<NavDropdown
+							title={`Hola ${user.name}!`}
+							id='collasible-nav-dropdown'
+						>
+							<NavDropdown.Item href='/profile'>
+								<small>
+									<i className='fas fa-user' /> Mi perfil
+								</small>
+							</NavDropdown.Item>
+							<NavDropdown.Divider />
+							<NavDropdown.Item onClick={handleLogout}>
+								<small>
+									<i className='fas fa-sign-out-alt' /> Salir
+								</small>
+							</NavDropdown.Item>
+						</NavDropdown>
+					)}
 
-				<div
-					role='menuitem'
-					className='navbar-burger burger'
-					aria-label='menu'
-					data-target='navigation'
-					onClick={handleSetMobileMenu}
-				>
-					<span aria-hidden='true' />
-					<span aria-hidden='true' />
-					<span aria-hidden='true' />
-				</div>
-			</div>
-
-			<div
-				id='navigation'
-				className={`${showMenu ? 'navbar-menu is-active' : 'navbar-menu'}`}
-			>
-				<div className='navbar-start'>
-					<Link to='/' className='navbar-item'>
-						Inicio
-					</Link>
-				</div>
-
-				<div className='navbar-end'>
-					<div className='navbar-item'>
-						<div className='buttons'>
-							{!user ? (
-								<Link to='/login' className='nav__item has-text-dark'>
-									<span className='icon'>
-										<span className='fa-stack'>
-											<i className='fas fa-user-circle' />
-										</span>
-									</span>
-								</Link>
-							) : (
-								<div className='navbar-item has-dropdown is-hoverable'>
-									<div role='menuitem' className='navbar-link'>
-										Hola {user.name}!
-									</div>
-
-									<div className='navbar-dropdown'>
-										<a href='#!' className='navbar-item'>
-											<i className='fas fa-user' /> Mi perfil
-										</a>
-										<hr className='navbar-divider' />
-										<div
-											role='menuitem'
-											className='navbar-item'
-											onClick={handleLogout}
-										>
-											<i className='fas fa-user' /> Salir
-										</div>
-									</div>
-								</div>
-							)}
-
-							<div role='menuitem' className='nav__item has-text-dark'>
-								<span className='icon'>
-									<span className='fa-stack'>
-										<i className='fas fa-shopping-cart' />
-									</span>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+					<Nav.Link className='nav__item'>
+						<i className='fas fa-shopping-cart' />
+					</Nav.Link>
+				</Nav>
+			</Navbar.Collapse>
+		</Navbar>
 	);
 };
 
-Navbar.propTypes = {
+Navigation.propTypes = {
 	login_state: PropTypes.bool.isRequired,
 	logoutMethod: PropTypes.func.isRequired,
 };
@@ -116,4 +76,4 @@ export default connect(
 	(dispatch) => ({
 		logoutMethod: logoutAction(dispatch),
 	}),
-)(Navbar);
+)(Navigation);
