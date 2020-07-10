@@ -7,7 +7,7 @@ import { logoutAction } from '../../actions';
 import './index.scss';
 
 const Navbar = (props) => {
-	const { logoutMethod, login_state } = props;
+	const { logoutMethod } = props;
 
 	const [showMenu, setShowMenu] = useState(false);
 	const user = JSON.parse(localStorage.getItem('user'));
