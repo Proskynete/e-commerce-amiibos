@@ -102,7 +102,7 @@ Login.propTypes = {
 
 export default connect(
 	(state) => ({
-		login_state: state.login.has_login,
+		login_state: state.loginStore.has_login,
 	}),
 	(dispatch) => ({
 		loginMethod: loginAction(dispatch),

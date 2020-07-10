@@ -1,31 +1,26 @@
-import React, { memo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAmiibosPaginatedAction } from '../../../actions';
 
 const Home = (props) => {
 	const { amiibos, getAmiibosPaginatedMethod } = props;
-	const [pagination, setPagination] = useState({ page: 1, limit: 15 });
-	const [showAmiibos, setShowAmiibos] = useState([]);
-
-	getAmiibosPaginatedMethod({
-		page: pagination.page,
-		limit: pagination.limit,
-	});
+	const [pagination] = useState({ page: 1, limit: 15 });
 
 	useEffect(() => {
-		if (amiibos.length > 0) {
-			setShowAmiibos(amiibos);
+		if (amiibos.length < 1) {
+			getAmiibosPaginatedMethod({
+				page: pagination.page,
+				limit: pagination.limit,
+			});
 		}
-	}, [amiibos]);
-
-	console.log(showAmiibos);
+	}, []);
 
 	return (
 		<div className='container'>
 			<div className='columns'>
 				<div className='column'>
-					<h1>Hello</h1>
+					{amiibos && amiibos.length > 0 ? <h1>yeah</h1> : null}
 				</div>
 			</div>
 		</div>
@@ -33,14 +28,21 @@ const Home = (props) => {
 };
 
 Home.propTypes = {
+	amiibos: PropTypes.array.isRequired,
+	pagination: PropTypes.object.isRequired,
+	status: PropTypes.number.isRequired,
+	message: PropTypes.string.isRequired,
 	getAmiibosPaginatedMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
 	(state) => ({
-		amiibos: state.amiibos.amiibos,
+		amiibos: state.amiibosStore.amiibos,
+		pagination: state.amiibosStore.pagination,
+		status: state.amiibosStore.status,
+		message: state.amiibosStore.message,
 	}),
 	(dispatch) => ({
 		getAmiibosPaginatedMethod: getAmiibosPaginatedAction(dispatch),
 	}),
-)(memo(Home));
+)(Home);

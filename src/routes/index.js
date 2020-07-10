@@ -1,7 +1,7 @@
 import { lazy } from 'react';
 
-const HomeView = lazy(() => import('../views/layout/home/'));
-const ProfileView = lazy(() => import('../views/layout/profile/'));
+const HomeView = lazy(() => import('../views/layout/home'));
+const ProfileView = lazy(() => import('../views/layout/profile'));
 
 export const routes = [
 	{
