@@ -4,7 +4,7 @@ export const mapTypes = {
 		name: 'Figura',
 	},
 	Card: {
-		color: 'black',
+		color: 'dark',
 		name: 'Targeta',
 	},
 	Yarn: {

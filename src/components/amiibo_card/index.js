@@ -33,7 +33,7 @@ const AmiiboCard = (props) => {
 							</p>
 						</Card.Subtitle>
 
-						<Card.Text>
+						<div className='card-text'>
 							<p
 								className={`a-card__inner__content__rating ${
 									rating < 3
@@ -57,15 +57,19 @@ const AmiiboCard = (props) => {
 									{currencyformat({ number: price.internet, simbol: true })}
 								</span>
 							</p>
-							<p className='a-card__inner__content__price normal'>
+							<div className='a-card__inner__content__price normal'>
 								Precio normal:
 								<span>
 									{currencyformat({ number: price.normal, simbol: true })}
 								</span>
-							</p>
-						</Card.Text>
+							</div>
+						</div>
 
-						<Button variant='outline-info' block>
+						<Button
+							variant='outline-info'
+							className='a-card__inner__content__button'
+							block
+						>
 							Agregar a mi carrito
 						</Button>
 					</Card.Body>

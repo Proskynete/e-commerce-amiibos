@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Container, Row, Pagination } from 'react-bootstrap';
 import { getAmiibosPaginatedAction } from '../../../actions';
 import AmiiboCard from '../../../components/amiibo_card';
+import './index.scss';
 
 const Home = (props) => {
 	const { amiibos, pagination, getAmiibosPaginatedMethod } = props;
@@ -37,6 +38,7 @@ const Home = (props) => {
 
 		return item.map((i) => (
 			<Pagination.Item
+				key={i}
 				active={i === pagination.current_page ? true : false}
 				onClick={() => updateAmiibos(i)}
 			>
@@ -80,22 +82,29 @@ const Home = (props) => {
 	};
 
 	return (
-		<Container>
+		<Container className='home'>
 			{amiibos && amiibos.length > 0 ? (
-				<>
-					<Row className='justify-content-md-center'>
+				<div className='home__inner'>
+					<Row className='justify-content-md-center home__inner__container'>
 						{handleShowAmiibos(amiibos)}
 					</Row>
 
-					<Row className='justify-content-md-center'>
+					<Row className='justify-content-md-center home__inner__container'>
 						{handlePrintPagination(pagination)}
 					</Row>
-				</>
+				</div>
 			) : (
 				'Cargando...'
 			)}
 		</Container>
 	);
+};
+
+Home.propTypes = {
+	amiibos: PropTypes.array.isRequired,
+	pagination: PropTypes.object.isRequired,
+	message: PropTypes.string.isRequired,
+	getAmiibosPaginatedMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
