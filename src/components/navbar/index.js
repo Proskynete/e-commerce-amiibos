@@ -33,9 +33,9 @@ const Navigation = (props) => {
 				</Nav>
 				<Nav className='navbar__right'>
 					{!user ? (
-						<Link to='/login' className='nav__item'>
+						<Nav.Link href='/login'>
 							<i className='fas fa-user-circle' />
-						</Link>
+						</Nav.Link>
 					) : (
 						<NavDropdown
 							title={`Hola ${user.name}!`}
