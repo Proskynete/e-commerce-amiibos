@@ -128,12 +128,7 @@ const CustomModal = (props) => {
 				</Container>
 			</Modal.Body>
 			<Modal.Footer>
-				{cart.length > 0 ? (
-					<Button variant='outline-info' href='/checkout'>
-						Ir a pagar
-					</Button>
-				) : null}
-
+				{cart.length > 0 ? <Link to='/checkout'>Ir a pagar</Link> : null}
 				<Button variant='outline-secondary' onClick={() => hideModalMethod()}>
 					Cerrar
 				</Button>

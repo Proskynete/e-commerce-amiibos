@@ -51,12 +51,6 @@ const Navigation = (props) => {
 							title={`Hola ${user.name}!`}
 							id='collasible-nav-dropdown'
 						>
-							<NavDropdown.Item href='/profile'>
-								<small>
-									<i className='fas fa-user' /> Mi perfil
-								</small>
-							</NavDropdown.Item>
-							<NavDropdown.Divider />
 							<NavDropdown.Item onClick={handleLogout}>
 								<small>
 									<i className='fas fa-sign-out-alt' /> Salir

@@ -14,6 +14,11 @@ const App = () => {
 					<Route exact path='/' component={(props) => <Layout {...props} />} />
 					<Route
 						exact
+						path='/checkout'
+						component={(props) => <Layout {...props} />}
+					/>
+					<Route
+						exact
 						path='/login'
 						component={(props) => <LoginView {...props} />}
 					/>
