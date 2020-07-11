@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Container, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { routes } from '../../routes';
 import Navigation from '../../components/navbar/';
 

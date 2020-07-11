@@ -29,13 +29,13 @@ const Navigation = (props) => {
 			<Navbar.Toggle aria-controls='responsive-navbar-nav' />
 			<Navbar.Collapse id='responsive-navbar-nav'>
 				<Nav className='mr-auto'>
-					{/*	<Nav.Link href='/'>Inicio</Nav.Link> */}
+					{/*	<Link href='/' className='nav-link'>Inicio</Link> */}
 				</Nav>
 				<Nav className='navbar__right'>
 					{!user ? (
-						<Nav.Link href='/login'>
+						<Link to='/login' className='nav-link'>
 							<i className='fas fa-user-circle' />
-						</Nav.Link>
+						</Link>
 					) : (
 						<NavDropdown
 							title={`Hola ${user.name}!`}
@@ -55,9 +55,9 @@ const Navigation = (props) => {
 						</NavDropdown>
 					)}
 
-					<Nav.Link className='nav__item'>
+					<Link to='' className='nav__item nav-link'>
 						<i className='fas fa-shopping-cart' />
-					</Nav.Link>
+					</Link>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
