@@ -1,0 +1,14 @@
+@import "~bootstrap/scss/bootstrap";
+@import './custom-colors';
+
+body {
+  background-color: $custom-grey;
+
+  div[role='menuitem'] {
+    cursor: pointer;
+  }
+
+  .main-section {
+    padding-top: 80px;
+  }
+}

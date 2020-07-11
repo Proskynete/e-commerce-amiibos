@@ -1,0 +1,12 @@
+.home {
+  margin-bottom: 40px;
+
+  .container__amiibos {
+    @media screen and (min-width: 1024px) {
+      display: flex;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
+    }
+  }
+}
