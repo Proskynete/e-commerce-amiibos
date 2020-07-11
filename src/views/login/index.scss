@@ -1,0 +1,19 @@
+.login {
+  &__logo {
+    text-align: center;
+
+    >img {
+      max-width: 80%;
+      padding-bottom: 20px;
+      padding-top: 20px;
+    }
+  }
+
+  &__form {
+    margin-top: 30px;
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}
