@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { prettyRating } from '../../helper/rating.helper';
 import { Col, Card, Badge, Button } from 'react-bootstrap';
 import { currencyformat } from '../../helper/currency.helper';
 import { mapTypes } from '../../helper/types.helper';
+import { addAmiiboToCartAction } from '../../actions';
 import './index.scss';
 
 const AmiiboCard = (props) => {
-	const { amiiboSeries, gameSeries, image, name, type, price, rating } = props;
+	const {
+		amiiboSeries,
+		gameSeries,
+		image,
+		name,
+		type,
+		price,
+		rating,
+		tail,
+		cart,
+		addAmiiboToCartMethod,
+	} = props;
+	const [hasAdded, setHasAdded] = useState(false);
+
+	const handleAddToCart = () => {
+		addAmiiboToCartMethod({ image, name, type, price, tail });
+	};
+
+	const handleRemoveToCart = () => {};
+
+	useEffect(() => {
+		const amiiboFinded = cart.find((amiibo) => amiibo.tail === tail);
+		if (amiiboFinded) {
+			setHasAdded(true);
+		} else {
+			setHasAdded(false);
+		}
+	}, [cart, tail]);
 
 	return (
 		<Col xs md={3}>
@@ -65,13 +95,25 @@ const AmiiboCard = (props) => {
 							</div>
 						</div>
 
-						<Button
-							variant='outline-info'
-							className='a-card__inner__content__button'
-							block
-						>
-							Agregar a mi carrito
-						</Button>
+						{!hasAdded ? (
+							<Button
+								variant='outline-info'
+								className='a-card__inner__content__button'
+								onClick={handleAddToCart}
+								block
+							>
+								Agregar a mi carrito
+							</Button>
+						) : (
+							<Button
+								variant='outline-danger'
+								className='a-card__inner__content__button'
+								onClick={handleRemoveToCart}
+								block
+							>
+								Eliminar de mi carrito
+							</Button>
+						)}
 					</Card.Body>
 				</div>
 			</Card>
@@ -79,4 +121,16 @@ const AmiiboCard = (props) => {
 	);
 };
 
-export default AmiiboCard;
+AmiiboCard.propTypes = {
+	cart: PropTypes.array.isRequired,
+	addAmiiboToCartMethod: PropTypes.func.isRequired,
+};
+
+export default connect(
+	(state) => ({
+		cart: state.cartStore.amiibos,
+	}),
+	(dispatch) => ({
+		addAmiiboToCartMethod: addAmiiboToCartAction(dispatch),
+	}),
+)(AmiiboCard);
