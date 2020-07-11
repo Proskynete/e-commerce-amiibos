@@ -11,6 +11,7 @@ import {
 	Badge,
 } from 'react-bootstrap';
 import { currencyformat } from '../../helper/currency.helper';
+import { mapTypes } from '../../helper/types.helper';
 import { hideModalAction, removeAmiiboFromCartAction } from '../../actions';
 
 const CustomModal = (props) => {
@@ -23,7 +24,7 @@ const CustomModal = (props) => {
 			return (
 				<tr key={amiibo.tail}>
 					<td>{amiibo.name}</td>
-					<td>{amiibo.type}</td>
+					<td>{mapTypes[amiibo.type].name}</td>
 					<td>
 						{currencyformat({ number: amiibo.price.normal, simbol: true })}
 					</td>
@@ -95,7 +96,7 @@ const CustomModal = (props) => {
 								<Col>
 									<p style={{ margin: '0' }}>
 										Total precio normal:
-										<span>
+										<span style={{ marginLeft: '5px' }}>
 											{currencyformat({
 												number: totalPrice.normal,
 												simbol: true,
@@ -104,7 +105,7 @@ const CustomModal = (props) => {
 									</p>
 									<p style={{ margin: '0' }}>
 										Total precio internet:
-										<span>
+										<span style={{ marginLeft: '5px' }}>
 											{currencyformat({
 												number: totalPrice.internet,
 												simbol: true,
@@ -132,6 +133,13 @@ const CustomModal = (props) => {
 			</Modal.Footer>
 		</Modal>
 	);
+};
+
+CustomModal.propTypes = {
+	show: PropTypes.bool.isRequired,
+	cart: PropTypes.array.isRequired,
+	hideModalMethod: PropTypes.func.isRequired,
+	removeAmiiboFromCartMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
