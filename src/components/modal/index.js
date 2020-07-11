@@ -13,6 +13,7 @@ import {
 import { currencyformat } from '../../helper/currency.helper';
 import { mapTypes } from '../../helper/types.helper';
 import { hideModalAction, removeAmiiboFromCartAction } from '../../actions';
+import { Link } from 'react-router-dom';
 
 const CustomModal = (props) => {
 	const { show, cart, hideModalMethod, removeAmiiboFromCartMethod } = props;
@@ -127,6 +128,12 @@ const CustomModal = (props) => {
 				</Container>
 			</Modal.Body>
 			<Modal.Footer>
+				{cart.length > 0 ? (
+					<Button variant='outline-info' href='/checkout'>
+						Ir a pagar
+					</Button>
+				) : null}
+
 				<Button variant='outline-secondary' onClick={() => hideModalMethod()}>
 					Cerrar
 				</Button>
