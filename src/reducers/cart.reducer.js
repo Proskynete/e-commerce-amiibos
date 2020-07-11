@@ -1,4 +1,7 @@
-import { ADD_AMIIBO_TO_CART } from '../config/constants';
+import {
+	ADD_AMIIBO_TO_CART,
+	REMOVE_AMIIBO_FROM_CART,
+} from '../config/constants';
 
 const initialState = {
 	amiibos: [],
@@ -18,6 +21,13 @@ export default (state = initialState, action) => {
 
 			return {
 				...state,
+			};
+		case REMOVE_AMIIBO_FROM_CART:
+			return {
+				...state,
+				amiibos: state.amiibos.filter(
+					(amiibo) => amiibo.tail !== action.payload.tail,
+				),
 			};
 		default:
 			return state;

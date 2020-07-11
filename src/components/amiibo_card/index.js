@@ -5,7 +5,10 @@ import { prettyRating } from '../../helper/rating.helper';
 import { Col, Card, Badge, Button } from 'react-bootstrap';
 import { currencyformat } from '../../helper/currency.helper';
 import { mapTypes } from '../../helper/types.helper';
-import { addAmiiboToCartAction } from '../../actions';
+import {
+	addAmiiboToCartAction,
+	removeAmiiboFromCartAction,
+} from '../../actions';
 import './index.scss';
 
 const AmiiboCard = (props) => {
@@ -20,6 +23,7 @@ const AmiiboCard = (props) => {
 		tail,
 		cart,
 		addAmiiboToCartMethod,
+		removeAmiiboFromCartMethod,
 	} = props;
 	const [hasAdded, setHasAdded] = useState(false);
 
@@ -27,7 +31,9 @@ const AmiiboCard = (props) => {
 		addAmiiboToCartMethod({ image, name, type, price, tail });
 	};
 
-	const handleRemoveToCart = () => {};
+	const handleRemoveFromCart = () => {
+		removeAmiiboFromCartMethod(tail);
+	};
 
 	useEffect(() => {
 		const amiiboFinded = cart.find((amiibo) => amiibo.tail === tail);
@@ -108,7 +114,7 @@ const AmiiboCard = (props) => {
 							<Button
 								variant='outline-danger'
 								className='a-card__inner__content__button'
-								onClick={handleRemoveToCart}
+								onClick={handleRemoveFromCart}
 								block
 							>
 								Eliminar de mi carrito
@@ -124,6 +130,7 @@ const AmiiboCard = (props) => {
 AmiiboCard.propTypes = {
 	cart: PropTypes.array.isRequired,
 	addAmiiboToCartMethod: PropTypes.func.isRequired,
+	removeAmiiboFromCartMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -132,5 +139,6 @@ export default connect(
 	}),
 	(dispatch) => ({
 		addAmiiboToCartMethod: addAmiiboToCartAction(dispatch),
+		removeAmiiboFromCartMethod: removeAmiiboFromCartAction(dispatch),
 	}),
 )(AmiiboCard);
