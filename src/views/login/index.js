@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Container, Row, Col, Card, Button, Form } from 'react-bootstrap';
 import { loginAction } from '../../actions';
 import { defaultValues } from '../../config/default_values';
 import Loader from '../../components/loader';

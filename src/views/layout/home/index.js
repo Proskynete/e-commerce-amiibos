@@ -20,18 +20,18 @@ const Home = (props) => {
 		const item = [];
 		if (
 			pagination.current_page >= 1 &&
-			pagination.current_page < pagination.last_page - 8
+			pagination.current_page < pagination.last_page - 4
 		) {
 			for (
 				let i = pagination.current_page;
-				i < pagination.current_page + 8;
+				i < pagination.current_page + 4;
 				i++
 			) {
 				item.push(i);
 			}
 		}
-		if (pagination.current_page >= pagination.last_page - 8) {
-			for (let i = pagination.last_page - 7; i <= pagination.last_page; i++) {
+		if (pagination.current_page >= pagination.last_page - 4) {
+			for (let i = pagination.last_page - 3; i <= pagination.last_page; i++) {
 				item.push(i);
 			}
 		}
@@ -55,7 +55,7 @@ const Home = (props) => {
 
 	const handlePrintPagination = (pagination) => {
 		return (
-			<Pagination>
+			<Pagination className='justify-content-center'>
 				{pagination.current_page > 1 ? (
 					<>
 						<Pagination.First
@@ -82,8 +82,8 @@ const Home = (props) => {
 	};
 
 	return (
-		<Container className='home'>
-			<Row className='justify-content-md-center'>
+		<Container fluid className='home'>
+			<Row className='justify-content-center'>
 				{amiibos && amiibos.length > 0 ? (
 					<>
 						<Col xs={12}>
@@ -105,7 +105,7 @@ const Home = (props) => {
 							</div>
 						</Col>
 
-						{handlePrintPagination(pagination)}
+						<Col xs={12}>{handlePrintPagination(pagination)}</Col>
 					</>
 				) : (
 					'Cargando...'
