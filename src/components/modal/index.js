@@ -128,7 +128,15 @@ const CustomModal = (props) => {
 				</Container>
 			</Modal.Body>
 			<Modal.Footer>
-				{cart.length > 0 ? <Link to='/checkout'>Ir a pagar</Link> : null}
+				{cart.length > 0 ? (
+					<Link
+						to='/checkout'
+						className='btn btn-outline-info'
+						onClick={() => hideModalMethod()}
+					>
+						Ir a pagar
+					</Link>
+				) : null}
 				<Button variant='outline-secondary' onClick={() => hideModalMethod()}>
 					Cerrar
 				</Button>

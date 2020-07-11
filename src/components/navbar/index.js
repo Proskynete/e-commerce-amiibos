@@ -33,13 +33,18 @@ const Navigation = (props) => {
 			fixed='top'
 			className='navigation'
 		>
-			<Navbar.Brand href='/' className='navbar-item logo__container'>
+			<Navbar.Brand className='navbar-item logo__container'>
 				<img src={LOGO} alt='Amiibos logo' />
 			</Navbar.Brand>
 			<Navbar.Toggle aria-controls='responsive-navbar-nav' />
 			<Navbar.Collapse id='responsive-navbar-nav'>
 				<Nav className='mr-auto'>
-					{/*	<Link href='/' className='nav-link'>Inicio</Link> */}
+					<Link to='/' className='nav-link'>
+						Inicio
+					</Link>
+					<Link to='/checkout' className='nav-link'>
+						Revisar compra
+					</Link>
 				</Nav>
 				<Nav className='navbar__right'>
 					{!user ? (
