@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import LOGO from '../../assets/images/logo.png';
-import { logoutAction } from '../../actions';
+import { logoutAction, showModalAction } from '../../actions';
 import './index.scss';
 
 const Navigation = (props) => {
-	const { cart, logoutMethod } = props;
+	const { cart, logoutMethod, showModalMethod } = props;
 	const [amiibos, setAmiibos] = useState(false);
 
 	const user = JSON.parse(localStorage.getItem('user'));
@@ -65,12 +65,13 @@ const Navigation = (props) => {
 						</NavDropdown>
 					)}
 
-					<Link
-						to=''
+					<div
+						role='menuitem'
+						onClick={() => showModalMethod()}
 						className={`nav__item nav-link ${amiibos ? 'has-amiibos' : null}`}
 					>
 						<i className='fas fa-shopping-cart' />
-					</Link>
+					</div>
 				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
@@ -80,6 +81,7 @@ const Navigation = (props) => {
 Navigation.propTypes = {
 	cart: PropTypes.array.isRequired,
 	logoutMethod: PropTypes.func.isRequired,
+	showModalMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
@@ -88,5 +90,6 @@ export default connect(
 	}),
 	(dispatch) => ({
 		logoutMethod: logoutAction(dispatch),
+		showModalMethod: showModalAction(dispatch),
 	}),
 )(Navigation);
