@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,12 +8,22 @@ import { logoutAction } from '../../actions';
 import './index.scss';
 
 const Navigation = (props) => {
-	const { logoutMethod } = props;
+	const { cart, logoutMethod } = props;
+	const [amiibos, setAmiibos] = useState(false);
+
 	const user = JSON.parse(localStorage.getItem('user'));
 
 	const handleLogout = () => {
 		logoutMethod();
 	};
+
+	useEffect(() => {
+		if (cart && cart.length > 0) {
+			setAmiibos(true);
+		} else {
+			setAmiibos(false);
+		}
+	}, [cart]);
 
 	return (
 		<Navbar
@@ -55,7 +65,10 @@ const Navigation = (props) => {
 						</NavDropdown>
 					)}
 
-					<Link to='' className='nav__item nav-link'>
+					<Link
+						to=''
+						className={`nav__item nav-link ${amiibos ? 'has-amiibos' : null}`}
+					>
 						<i className='fas fa-shopping-cart' />
 					</Link>
 				</Nav>
@@ -65,13 +78,13 @@ const Navigation = (props) => {
 };
 
 Navigation.propTypes = {
-	login_state: PropTypes.bool.isRequired,
+	cart: PropTypes.array.isRequired,
 	logoutMethod: PropTypes.func.isRequired,
 };
 
 export default connect(
 	(state) => ({
-		login_state: state.loginStore.has_login,
+		cart: state.cartStore.amiibos,
 	}),
 	(dispatch) => ({
 		logoutMethod: logoutAction(dispatch),
